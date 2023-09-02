@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="base.css">
+
+    <style>
+        .el.col{
+            margin-top: 30px;
+        }
+        #edit{
+            height: 40px;
+            background-color: rgba(64,158,255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            width: 100px;
+            border-radius: 5px;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+    <el-container>
+        <el-header>
+            <el-row>
+                <el-col :span="6">
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb-item><a href="MyInfo.html">个人中心</a></el-breadcrumb-item>
+                    </el-breadcrumb>
+                </el-col>
+                <el-col :span="8">
+                    <el-input v-model="queryString" placeholder="请输入要查找的文章的标题或作者">
+
+                    </el-input>
+                </el-col>
+                <el-col :span="2">
+                    <el-button type="primary" icon="el-icon-search" @click="select()">搜索</el-button>
+                </el-col>
+                <el-col :span="2">
+                    <div id="edit">
+                        <i class="el-icon-document-add"></i>
+                        <a type="primary" href="edit.html" style="color: white">发布</a>
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <img src="img/logo.png" width="240" height="130" style="float: right">
+                </el-col>
+            </el-row>
+        </el-header>
+        <el-main style="margin-top: 100px ;margin-right: 350px" >
+            <el-descriptions title ="用户信息">
+                <el-descriptions-item label="用户名">{{user.nickname}}</el-descriptions-item>
+                <el-descriptions-item label="粉丝数">{{user.followings}}</el-descriptions-item>
+                <el-descriptions-item label="注册时间">{{user.registrationTime}}</el-descriptions-item>
+                <el-descriptions-item label="文章数">{{user.articles}}</el-descriptions-item>
+            </el-descriptions>
+        </el-main>
+        <h1 style="padding-left: 370px;font-size: 40px">我的文章</h1>
+        <el-main style="margin-top: 100px">
+            <ul v-for="article in articles" style="margin-right: 350px;margin-left:350px">
+                <li>
+                    <h1 tyle="font-size: 30px">{{article.title}}</h1>
+                </li>
+                <li style="height: 90px; overflow: hidden">
+                    <div style="word-wrap: break-word; font-size:15px">{{article.content}}</div>
+                </li>
+            </ul>
+        </el-main>
+    </el-container>
+</div>
+
+<script>
+    const vue = new Vue({
+        el:'#app',
+        data(){
+            return{
+                queryString:"",
+                user:{
+                    nickname:"",
+                    followings:"",
+                    registrationTime:"",
+                    articles:""
+                },
+                articles:[
+                    {
+                        title:'HAPPY1',
+                        content:'不快乐的朋友你好：要知道，二十多岁是一个很难快乐的年纪，经济未能独立，社会每一刻都在变化，信息太庞杂，诱惑力和煽动力又太大。也许你从节目和vlog里窥见到我们冰山一角的生活，误以为快乐和自由是理所当然的常态。不是的，我们在做的事情只是把快乐的瞬间收集起来，送给你，希望你快乐。所以，是时候打起精神来，尽可能地过好生活了。'
+                    },
+                    {
+                        title:'HAPPY2',
+                        content:'有一个消极的方法说人生本来就是苦痛的，能遇到的朋友，吃到的美食，收获到的爱都是人生的止痛药'
+                    },
+                    {
+                        title:'HAPPY3',
+                        content:'“我只是觉得自己普通，但我不觉得普通是一个贬义词”\n' +
+                            '“有的人的星光在背后 自己看不到 看到你在往前走的时候 我就会看到你后背的星光”\n' +
+                            '“但是我可以 在你的眼睛里看到”\n'
+                    },
+                    {
+                        title:'HAPPY4',
+                        content:'希望每一个明天都能再见'
+                    }
+                ],
+            }
+        },
+        method:{
+            select(){
+                //TODO
+            }
+        }
+    })
+</script>
+</body>
+</html>

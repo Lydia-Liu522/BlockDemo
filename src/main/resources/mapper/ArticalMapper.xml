@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Lydia.blockdemo.mapper.ArticalMapper">
+    <resultMap id="ArticleMap" type="com.Lydia.blockdemo.pojo.Artical">
+        <result property="articleId" column="article_id"></result>
+        <result property="publishedId" column="published_id"></result>
+    </resultMap>
+    <insert id="add">
+        insert into article (uid,title,content,published_time)
+        VALUES (#{uid},#{title},#{content},#{publishedTime})
+    </insert>
+    <select id="selectAll" resultMap="ArticleMap">
+        select * from article
+    </select>
+    <select id="selectByArticleId" resultMap="ArticleMap">
+        select article  where article_id = #{articleId}
+    </select>
+</mapper>
